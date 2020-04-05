@@ -5,13 +5,15 @@ int main()
  
   int count,j,n,time,remain,flag=0,time_quantum; 
   int wait_time=0,turnaround_time=0,at[10],bt[10],rt[10]; 
+  char cr;
   printf("Enter Total Process:\t "); 
   scanf("%d",&n); 
   remain=n; 
-  for(count=0;count<n;count++) 
+  for(count=0,cr='A';count<n;count++,cr++) 
   { 
-    printf("Enter Arrival Time and Burst Time for Process Process Number %d :",count+1); 
+    printf("Enter Arrival Time for Process Number %c :",cr); 
     scanf("%d",&at[count]); 
+    printf("Enter Burst Time for Process Number %c :",cr); 
     scanf("%d",&bt[count]); 
     rt[count]=bt[count]; 
   } 

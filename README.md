@@ -4,4 +4,4 @@ Code 1 Multi level feedback Queue Scheduling.
 
 
 
-Code 2 Premetive Round Robin Scheduling
+Code 2 Premetive Round Robin Scheduling.

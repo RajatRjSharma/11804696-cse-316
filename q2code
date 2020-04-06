@@ -3,53 +3,57 @@
 int main() 
 { 
  
-  int count,j,n,time,remain,flag=0,time_quantum; 
-  int wait_time=0,turnaround_time=0,at[10],bt[10],rt[10]; 
+  int co,mn,samy,bacha,chda=0,samyquantum; 
+  int ruksamy=0,gumchakersamy=0,ayyat[10],jalt[10],root[10],pr[10]; 
   char cr;
-  printf("Enter Total Process:\t "); 
-  scanf("%d",&n); 
-  remain=n; 
-  for(count=0,cr='A';count<n;count++,cr++) 
+  printf("Enter No.of Process:"); 
+  scanf("%d",&mn); 
+  bacha=mn; 
+  for(co=0,cr='A';co<mn;co++,cr++) 
   { 
-    printf("Enter Arrival Time for Process Number %c :",cr); 
-    scanf("%d",&at[count]); 
-    printf("Enter Burst Time for Process Number %c :",cr); 
-    scanf("%d",&bt[count]); 
-    rt[count]=bt[count]; 
+    printf("Arrival time for process %c :",cr); 
+    scanf("%d",&ayyat[co]); 
+    printf("Burst time for process %c :",cr); 
+    scanf("%d",&jalt[co]);
+	printf("Priority for process %c :",cr);
+    scanf("%d",&pr[co]); 
+    root[co]=jalt[co]; 
+    printf("-------------------------------\n");
   } 
-  printf("Enter Time Quantum:\t"); 
-  scanf("%d",&time_quantum); 
-  printf("\n\nProcess\t|Turnaround Time|Waiting Time\n\n"); 
-  for(time=0,count=0;remain!=0;) 
+  printf("Time Quantum is :"); 
+  scanf("%d",&samyquantum); 
+  printf("\n\nProcess\t|Turnaround Time|Waiting Time\n"); 
+  printf("----------------------------------------\n");
+  for(samy=0,co=0;bacha!=0;) 
   { 
-    if(rt[count]<=time_quantum && rt[count]>0) 
+    if(root[co]<=samyquantum && root[co]>0) 
     { 
-      time+=rt[count]; 
-      rt[count]=0; 
-      flag=1; 
+      samy+=root[co]; 
+      root[co]=0; 
+      chda=1; 
     } 
-    else if(rt[count]>0) 
+    else if(root[co]>0) 
     { 
-      rt[count]-=time_quantum; 
-      time+=time_quantum; 
+      root[co]-=samyquantum; 
+      samy+=samyquantum; 
     } 
-    if(rt[count]==0 && flag==1) 
+    if(root[co]==0 && chda==1) 
     { 
-      remain--; 
-      printf("P[%d]\t|\t%d\t|\t%d\n",count+1,time-at[count],time-at[count]-bt[count]); 
-      wait_time+=time-at[count]-bt[count]; 
-      turnaround_time+=time-at[count]; 
-      flag=0; 
+      bacha--; 
+      printf("%c\t|\t%d\t|\t%d\n",co+65,samy-ayyat[co],samy-ayyat[co]-jalt[co]); 
+      ruksamy+=samy-ayyat[co]-jalt[co]; 
+      gumchakersamy+=samy-ayyat[co]; 
+      chda=0; 
     } 
-    if(count==n-1) 
-      count=0; 
-    else if(at[count+1]<=time) 
-      count++; 
+    if(co==mn-1) 
+      co=0; 
+    else if(ayyat[co+1]<=samy) 
+      co++; 
     else 
-      count=0; 
+      co=0; 
   } 
-  printf("\nAverage Waiting Time= %f\n",wait_time*1.0/n); 
-  printf("Avg Turnaround Time = %f",turnaround_time*1.0/n); 
+  printf("\nAvg Waiting time is = %f\n",ruksamy*1.0/mn); 
+  printf("Avg Turnaround time is = %f",gumchakersamy*1.0/mn); 
   
   return 0; 
 }

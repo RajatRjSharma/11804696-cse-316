@@ -2,125 +2,130 @@
 
 struct multiq
 {
-    char naam;
-    int ayyat,jalt,rukt,tayyat,kit,prt;
+char idt;
+int arv_t,bur_t,ru_t,tuar_t,ki_t,pr_t;
 }
 ku1[15],ku2[15],ku3[15];
 int mn;
-void sch()
-{
-struct multiq te;
-int f,g;
-for(f=0;f<mn;f++)
-    {
-        for(g=f+1;g<mn;g++)
-            {
-                if(ku1[f].ayyat>ku1[g].ayyat)
-                    {
-                          te=ku1[f];
-                          ku1[f]=ku1[g];
-                          ku1[g]=te;
-                    }
-            }
-    }
-}
 
 int main()
 {
-     int f,s=0,h=0,samy=0,tku1=8,tku2=16,chda=0;
-     char pa;
-     printf("Enter No.of process:");
-     scanf("%d",&mn);
-     for(f=0,pa='A';f<mn;f++,pa++)
-     {
-         ku1[f].naam=pa;
-         printf("\nArrival time of process %c: ",ku1[f].naam);
-         scanf("%d",&ku1[f].ayyat);
-         printf("\nBurst time of process %c: ",ku1[f].naam);
-         scanf("%d",&ku1[f].jalt);
-         ku1[f].kit=ku1[f].jalt;
-         printf("\n-------------------------------\n");
+int f,s=0,h=0,samy=0,tku1=8,tku2=16,chda=0;
+char pa;
+printf("Enter No.of process:");
+scanf("%d",&mn);
+for(f=0,pa='A';f<mn;f++,pa++)
+{
+ku1[f].idt=pa;
+printf("\nArrival time of process %c: ",ku1[f].idt);
+scanf("%d",&ku1[f].arv_t);
+printf("\nBurst time of process %c: ",ku1[f].idt);
+scanf("%d",&ku1[f].bur_t);
+ku1[f].ki_t=ku1[f].bur_t;
+printf("\n-------------------------------\n");
+}
 
-    }
-sch();
-samy=ku1[0].ayyat;
+schd();
+samy=ku1[0].arv_t;
 printf("Process in queue 1 with Round Robin and Time Quantum = 8");
-printf("\n--------------------------------------------------------");
+printf("\n----------------------------------------------------------");
 printf("\nProcess\t|\tRT\t|\tWT\t|\tTAT\t\t");
 for(f=0;f<mn;f++)
 {
 
-  if(ku1[f].kit<=tku1)
-  {
+if(ku1[f].ki_t<=tku1)
+{
 
-       samy+=ku1[f].kit;
-       ku1[f].kit=0;
-       ku1[f].rukt=samy-ku1[f].ayyat-ku1[f].jalt;
-       ku1[f].tayyat=samy-ku1[f].ayyat;
-       printf("\n%c\t|\t%d\t|\t%d\t|\t%d",ku1[f].naam,ku1[f].jalt,ku1[f].rukt,ku1[f].tayyat);
+samy+=ku1[f].ki_t;
+ku1[f].ki_t=0;
+ku1[f].ru_t=samy-ku1[f].arv_t-ku1[f].bur_t;
+ku1[f].tuar_t=samy-ku1[f].arv_t;
+printf("\n%c\t|\t%d\t|\t%d\t|\t%d",ku1[f].idt,ku1[f].bur_t,ku1[f].ru_t,ku1[f].tuar_t);
 
-  }
-  else
-  {
-      ku2[s].rukt=samy;
-      samy+=tku1;
-      ku1[f].kit-=tku1;
-      ku2[s].jalt=ku1[f].kit;
-      ku2[s].kit=ku2[s].jalt;
-      ku2[s].naam=ku1[f].naam;
-      s=s+1;
-      chda=1;
-   }
+}
+else
+{
+ku2[s].ru_t=samy;
+samy+=tku1;
+ku1[f].ki_t-=tku1;
+ku2[s].bur_t=ku1[f].ki_t;
+ku2[s].ki_t=ku2[s].bur_t;
+ku2[s].idt=ku1[f].idt;
+s=s+1;
+chda=1;
+}
 }
 if(chda==1)
- {printf("\n----------------------------------------------------------");
- printf("\nProcess in queue 2 with Round Robin and time quantum = 16");
-  printf("\n----------------------------------------------------------");
-  printf("\nProcess\t|\tRT\t|\tWT\t|\tTAT\t\t");
-}for(f=0;f<s;f++)
-   {
-    if(ku2[f].kit<=tku2)
-     {
-       samy+=ku2[f].kit;
-       ku2[f].kit=0;
-       ku2[f].rukt=samy-tku1-ku2[f].jalt;
-       ku2[f].tayyat=samy-ku2[f].ayyat;
-       printf("\n%c\t|\t%d\t|\t%d\t|\t%d",ku2[f].naam,ku2[f].jalt,ku2[f].rukt,ku2[f].tayyat);
+{
+printf("\n----------------------------------------------------------");
+printf("\nProcess in queue 2 with Round Robin and time quantum = 16");
+printf("\n----------------------------------------------------------");
+printf("\nProcess\t|\tRT\t|\tWT\t|\tTAT\t\t");
+}
+for(f=0;f<s;f++)
+{
+if(ku2[f].ki_t<=tku2)
+{
+samy+=ku2[f].ki_t;
+ku2[f].ki_t=0;
+ku2[f].ru_t=samy-tku1-ku2[f].bur_t;
+ku2[f].tuar_t=samy-ku2[f].arv_t;
+printf("\n%c\t|\t%d\t|\t%d\t|\t%d",ku2[f].idt,ku2[f].bur_t,ku2[f].ru_t,ku2[f].tuar_t);
 
-    }
-    else
-    {
-      ku3[h].ayyat=samy;
-      samy+=tku2;
-      ku2[f].kit-=tku2;
-      ku3[h].jalt=ku2[f].kit;
-      ku3[h].kit=ku3[h].jalt;
-      ku3[h].naam=ku2[f].naam;
-      h=h+1;
-      chda=2;
-    }
-  }
+}
+else
+{
+ku3[h].arv_t=samy;
+samy+=tku2;
+ku2[f].ki_t-=tku2;
+ku3[h].bur_t=ku2[f].ki_t;
+ku3[h].ki_t=ku3[h].bur_t;
+ku3[h].idt=ku2[f].idt;
+h=h+1;
+chda=2;
+}
+}
 
-{if(chda==2)
+{
+if(chda==2)
 printf("\n----------------------------------------------------------");
 printf("\nProcess in queue 3 with First Come First Served");
 printf("\n----------------------------------------------------------");
+printf("\nProcess\t|\tRT\t|\tWT\t|\tTAT\t\t");
 }
 for(f=0;f<h;f++)
 {
-    if(f==0)
-            ku3[f].prt=ku3[f].jalt+samy-tku1-tku2;
-        else
-            ku3[f].prt=ku3[f-1].prt+ku3[f].jalt;
+if(f==0)
+ku3[f].pr_t=ku3[f].bur_t+samy-tku1-tku2;
+else
+ku3[f].pr_t=ku3[f-1].pr_t+ku3[f].bur_t;
 
 }
 
 for(f=0;f<h;f++)
-    {
-        ku3[f].tayyat=ku3[f].prt;
-        ku3[f].rukt=ku3[f].tayyat-ku3[f].jalt;
-        printf("\n%c\t|\t%d\t|\t%d\t|\t%d\t|\t",ku3[f].naam,ku3[f].jalt,ku3[f].rukt,ku3[f].tayyat);
+{
+ku3[f].tuar_t=ku3[f].pr_t;
+ku3[f].ru_t=ku3[f].tuar_t-ku3[f].bur_t;
+printf("\n%c\t|\t%d\t|\t%d\t|\t%d\t|\t",ku3[f].idt,ku3[f].bur_t,ku3[f].ru_t,ku3[f].tuar_t);
 
-    }
+}
 
+}
+
+void schd()
+{
+struct multiq te;
+int f,g;
+for(f=0;f<mn;f++)
+{
+for(g=f+1;g<mn;g++)
+{
+if(ku1[f].arv_t>ku1[g].arv_t)
+{
+te=ku1[f];
+ku1[f]=ku1[g];
+ku1[g]=te;
+}
+}
+}
 }

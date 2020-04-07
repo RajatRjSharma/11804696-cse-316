@@ -56,4 +56,4 @@ int main()
   printf("Avg Turnaround time is = %f",tuar_t*1.0/mn); 
   
   return 0; 
-}
+
